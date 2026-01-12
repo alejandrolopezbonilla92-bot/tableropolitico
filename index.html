@@ -27,7 +27,7 @@
 <div id="noticias">Cargando noticias...</div>
 
 <script>
-fetch("https://tableropoliticomex.wordpress.com/feed/")
+fetch("https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Ftableropoliticomex.wordpress.com%2Ffeed%2F")
   .then(response => response.text())
   .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
   .then(data => {
@@ -47,4 +47,5 @@ fetch("https://tableropoliticomex.wordpress.com/feed/")
     document.getElementById("noticias").innerHTML = html;
   });
 </script>
+
 
