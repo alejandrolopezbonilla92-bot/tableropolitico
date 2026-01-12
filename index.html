@@ -27,6 +27,28 @@
 <div id="noticias">Cargando noticias...</div>
 
 <script>
+fetch("https://api.rss2json.com/v1/api.json?rss_url=https://tableropoliticomex.wordpress.com/feed/")
+  .then(response => response.json())
+  .then(data => {
+    let html = "";
+    const items = data.items;
+    items.slice(0,10).forEach(item => {
+      html += `
+        <article>
+          <h3>${item.title}</h3>
+          <p>${item.description}</p>
+          <a href="${item.link}" target="_blank">Leer nota completa</a>
+        </article>
+      `;
+    });
+    document.getElementById("noticias").innerHTML = html;
+  })
+  .catch(error => {
+    document.getElementById("noticias").innerHTML = "Error al cargar las noticias.";
+    console.error(error);
+  });
+</script>
+
 fetch("https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Ftableropoliticomex.wordpress.com%2Ffeed%2F")
   .then(response => response.text())
   .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
@@ -47,5 +69,6 @@ fetch("https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Ftableropolitic
     document.getElementById("noticias").innerHTML = html;
   });
 </script>
+
 
 
